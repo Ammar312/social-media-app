@@ -28,7 +28,7 @@ const Home = () => {
   };
   return (
     <div>
-      {state.isLogin === true && state.role === "user" ? (
+      {/* {state.isLogin === true && state.role === "user" ? (
         <nav>
           <ul>
             <li>
@@ -37,7 +37,7 @@ const Home = () => {
             </li>
           </ul>
         </nav>
-      ) : null}
+      ) : null} */}
       <Bar />
       <button
         onClick={logoutHandle}

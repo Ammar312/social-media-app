@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import axios from "axios";
 import { GlobalContext } from "./context/context";
 import { baseURL } from "./core";
 import Profile from "./pages/Profile";
+import Chat from "./pages/Chat";
 
 const App = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -48,12 +49,33 @@ const App = () => {
   return (
     <BrowserRouter>
       {state.isLogin === true ? (
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="profile" element={<Profile />} /> */}
-          <Route path={`profile/:userId`} element={<Profile />} />
-          <Route path="*" element={<Navigate to="/" replace={true} />} />
-        </Routes>
+        <>
+          <nav className="flex gap-8 items-center mb-5">
+            <div>
+              <Link to="/">
+                <p className="font-extrabold text-5xl">Logo</p>
+              </Link>
+            </div>
+            <ul className="flex gap-2 items-center">
+              <li className="text-2xl font-normal">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="text-2xl font-normal">
+                <Link to={`/profile/${state.user._id}`}>Profile</Link>
+              </li>
+              <li className="text-2xl font-normal">
+                <Link to={`/chat`}>Chat</Link>
+              </li>
+            </ul>
+          </nav>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="profile" element={<Profile />} /> */}
+            <Route path={`profile/:userId`} element={<Profile />} />
+            <Route path="chat" element={<Chat />} />
+            <Route path="*" element={<Navigate to="/" replace={true} />} />
+          </Routes>
+        </>
       ) : null}
       {state.isLogin === false ? (
         <Routes>

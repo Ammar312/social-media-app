@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   return (
     <div>
-      <Link to={`/home`}>Home</Link>
       <UserProfile />
     </div>
   );
