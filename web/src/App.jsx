@@ -86,7 +86,7 @@ const App = () => {
               className={`${
                 mobile
                   ? "absolute top-[61px] left-0 w-full bg-gray-200 p-2"
-                  : " hidden items-center md:flex"
+                  : " hidden items-center md:flex md:gap-5"
               }`}
             >
               <ul className="flex gap-2 flex-col items-start md:flex-row">
