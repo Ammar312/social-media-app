@@ -5,6 +5,7 @@ import { GlobalContext } from "../context/context";
 import axios from "axios";
 import { baseURL } from "../core";
 import { Link } from "react-router-dom";
+import PostInput from "../components/PostInput";
 
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -27,26 +28,11 @@ const Home = () => {
     }
   };
   return (
-    <div>
-      {/* {state.isLogin === true && state.role === "user" ? (
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-              <Link to={`/profile/${state.user._id}`}>Profile</Link>
-            </li>
-          </ul>
-        </nav>
-      ) : null} */}
-      <Bar />
-      <button
-        onClick={logoutHandle}
-        className="p-1 m-2 border-2 border-blue-400 text-blue-500 cursor-pointer"
-      >
-        Logout
-      </button>
+    <div className="pt-[75px]">
+      <PostInput />
+
       <CreatePost />
-      <div>{JSON.stringify(state.user)}</div>
+      {/* <div>{JSON.stringify(state.user)}</div> */}
     </div>
   );
 };
