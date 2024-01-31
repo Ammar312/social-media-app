@@ -2,16 +2,20 @@ import React, { useContext, useState } from "react";
 import ContentWrapper from "./ContentWrapper";
 import { GlobalContext } from "../context/context";
 import { Modal } from "antd";
+import { FaImages } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 import "./style.css";
 import { Link } from "react-router-dom";
 
 const PostInput = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
+  const [img, setImg] = useState(null);
   const firstName = state.user.firstName;
   const fullName = `${state.user.firstName} ${state.user.lastName}`;
   const handleCancel = () => {
     setShowModal(false);
+    setImg(null);
   };
   return (
     <div className="my-4 max-w-md mx-auto">
@@ -58,10 +62,37 @@ const PostInput = () => {
             name=""
             id=""
             cols="30"
-            rows="5"
+            rows="3"
+            style={{ overflow: "hidden" }}
             placeholder={`What's on your mind, ${firstName}?`}
-            className="border-2 w-full outline-none resize-none text-2xl"
+            className={` w-full outline-none resize-none ${
+              img ? "text-lg" : "text-2xl"
+            }`}
           ></textarea>
+          <label htmlFor="postImg" className=" flex justify-end cursor-pointer">
+            {!img && <FaImages className="text-green-500 text-4xl" />}
+            <input
+              type="file"
+              id="postImg"
+              className="hidden"
+              accept="image/*"
+              onChange={(e) => {
+                const base64URL = URL.createObjectURL(e.target.files[0]);
+                setImg(base64URL);
+              }}
+            />
+          </label>
+          {img && (
+            <div className="h-[190px] overflow-auto relative">
+              <span
+                className="text-3xl absolute right-0 bg-white rounded-full p-[2px] cursor-pointer "
+                onClick={() => setImg(null)}
+              >
+                <RxCross2 />
+              </span>
+              <img src={img} className=" w-full  object-cover" />
+            </div>
+          )}
           <button className="w-full p-[5px] rounded-lg text-lg bg-blue-600 text-white cursor-pointer font-medium mt-4 hover:bg-blue-700">
             Post
           </button>
