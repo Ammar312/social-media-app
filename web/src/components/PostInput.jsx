@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import ContentWrapper from "./ContentWrapper";
 import { GlobalContext } from "../context/context";
 import { Modal } from "antd";
+import "./style.css";
 
 const PostInput = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -32,7 +33,11 @@ const PostInput = () => {
         </div>
       </ContentWrapper>
 
-      <Modal open={showModal} onCancel={handleCancel}></Modal>
+      <Modal
+        open={showModal}
+        onCancel={handleCancel}
+        title="Create Post"
+      ></Modal>
     </div>
   );
 };
